@@ -409,7 +409,7 @@ namespace dBridges.channel
 
         private bool isvalidSyntex(string name)
         {
-            Regex rgx = new Regex("^[a-zA-Z0-9.:_*]+$");
+            Regex rgx = new Regex("^[a-zA-Z0-9.:_-]+$");
             return rgx.IsMatch(name);
         }
         private bool validateSyntax(string name , int valid_type = 0)
@@ -699,7 +699,6 @@ namespace dBridges.channel
 
         public async Task<channel> subscribe(string channelName)
         {
-         
             try
             {
                 this.validateName(channelName);
@@ -708,9 +707,8 @@ namespace dBridges.channel
             {
                 throw (error);
             }
-
+      
             if (this.c_channelname_sid.ContainsKey(channelName)) { throw (new dBError("E093")); }
-
 
             bool mprivate = this.isPrivateChannel(channelName);
 
