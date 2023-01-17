@@ -859,7 +859,10 @@ namespace dBridges
                         await this.ClientSocket.DisconnectAsync();
                     break;
                 default:
-                        await this.connectionstate.handledispatcher(states.ERROR, payload);
+                    dBError err = new dBError("E082");
+                    err.updateCode(subject, payload);
+
+                        await this.connectionstate.handledispatcher(states.ERROR, err);
                     break;
 
             }
